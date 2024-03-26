@@ -1,2 +1,2 @@
-# waltz
-Array based stream cipher inspired by RC4, Spritz and VMPC
+# Waltz
+The `waltz(key, indices)` function takes a string (key) and an array of bytes (indices) as input, and returns an array of bytes. The HTML document included in the repository is a simple implementation for testing.
