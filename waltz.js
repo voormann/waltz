@@ -1,12 +1,19 @@
 function waltz(key, indices) {
     const sBox = Array.from({ length: 256 }, (_, i) => i);
+
+    for (let i = 0; i < 256; i++) {
+        const rho = Math.floor(((i + 1) * (i + 2)) / 2) % 256;
+
+        [sBox[i], sBox[rho]] = [sBox[rho], sBox[i]];
+    }
+
     let count = 0;
 
     for (let i = 0; i < 768; i++) {
-        const index = i % 256;
+        const cycle = i % 256;
 
-        count = (count + sBox[index] + key.charCodeAt(index % key.length)) % 256;
-        [sBox[index], sBox[count]] = [sBox[count], sBox[index]];
+        count = (count + sBox[cycle] + key[cycle % key.length]) % 256;
+        [sBox[cycle], sBox[count]] = [sBox[count], sBox[cycle]];
     }
 
     const result = [];
